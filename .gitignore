@@ -1,6 +1,6 @@
-*.synctex.gz
+*.gz
 *.run.xml
-tuelogo-eps-converted-to.pdf
+*.pdf
 *.toc
 *.log
 *.fls

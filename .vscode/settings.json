@@ -1,0 +1,16 @@
+{
+    "files.exclude": {
+        "*-converted-to.pdf": true,
+        "*.aux": true,
+        "*.bbl": true,
+        "*.bcf": true,
+        "*.blg": true,
+        "*.fdb_latexmk": true,
+        "*.fls": true,
+        "*.gz": true,
+        "*.log": true,
+        "*.out": true,
+        "*.run.xml": true,
+        "*.toc": true
+    }
+}

@@ -9,6 +9,10 @@
 \usepackage[noend]{algpseudocode}
 \usepackage[hidelinks]{hyperref}
 
+\usepackage[utf8]{inputenc}
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
 
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \DeclareMathOperator{\di}{d\!}
@@ -45,25 +49,24 @@
 \graphicspath{{images/}}
 
 
-\title{Title}
-\subtitle{Subtitle \\~\\ \small{Student1\tabto*{7em} (S\#1)\\ \texttt{student1@student.tue.nl} \\~\\ Student2\tabto*{7em} (S\#2)\\ \texttt{student2@student.tue.nl}}}
+\title{A New Way to Simulate HIFU System Using Trident}
+\subtitle{Internship Report \\~\\ \small{Weizhou Xing \\ \texttt{w.xing@student.tue.nl}}}
 
-\author{Student1\tabto*{6em} (S\#1) \\ Student2\tabto*{6em} (S\#2)}
+\author{Weizhou Xing}
 
 %\version{1.0}
-\orderissuer{Lecturer}
+\orderissuer{P. A. J. Hilbers, B. J. T. Breuer}
 \copyholder{}
-\administrativeunit{Department of SOME Engineering}
-\department{\textit{Research Group}}
+\administrativeunit{Department of Biomedical Engineering}
+\department{\textit{Computational Biology Group}}
 \Address{Postbus 513, 5600 MB Eindhoven\\ The Netherlands}
 %\website{}
 \reference{}
-\AuthorNameFooter{AuthorNames}
+\AuthorNameFooter{Xing, W}
 
 \makeatletter
 \def\BState{\State\hskip-\ALG@thistlm}
 \makeatother
-
 
 \begin{document}
 \maketitle
@@ -74,17 +77,20 @@
 
 
 \chapter{Chapter1}
-% \subfile{chapters/part1.tex}
+\subfile{chapters/part1.tex}
 
 \chapter{Chapter2}
-% \subfile{chapters/part2.tex}
+\subfile{chapters/part2.tex}
 
 \begin{appendices}
-
 \chapter{Appendix1}
-% \subfile{chapters/appendix.tex}
-
+\subfile{chapters/appendix.tex}
 \end{appendices}
 
+\printbibliography[
+heading=bibintoc,
+title={References}
+] %Prints the entire bibliography with the titel "Whole bibliography"
 
+\clearpage
 \end{document} 
