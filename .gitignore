@@ -1,0 +1,12 @@
+*.synctex.gz
+*.run.xml
+tuelogo-eps-converted-to.pdf
+*.toc
+*.log
+*.fls
+*.fdb_latexmk
+*.blg
+*.bcf
+*.bbl
+*.aux
+*.out
