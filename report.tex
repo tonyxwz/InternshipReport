@@ -1,4 +1,5 @@
-\documentclass[11pt,a4paper]{report}
+\documentclass[12pt,a4paper]{report}
+\usepackage{csquotes}
 \usepackage{graphicx,color,booktabs,listings,caption,subcaption,tikz,amsmath,amssymb,placeins,subfiles,tabto}
 \usetikzlibrary{shapes,arrows}
 \usepackage[english]{babel}
@@ -7,12 +8,19 @@
 \usepackage[titletoc]{appendix}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
-\usepackage[hidelinks]{hyperref}
 
 \usepackage[utf8]{inputenc}
+
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usepackage{biblatex}
 \addbibresource{references.bib}
 
+\usepackage{url}
+\urlstyle{same}
+
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{subcaption} 
 
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \DeclareMathOperator{\di}{d\!}
@@ -49,13 +57,13 @@
 \graphicspath{{images/}}
 
 
-\title{A New Way to Simulate HIFU System Using Trident}
-\subtitle{Internship Report \\~\\ \small{Weizhou Xing \\ \texttt{w.xing@student.tue.nl}}}
+\title{A New Way to Simulate HIFU System Using Trident Rays}
+\subtitle{Internship Report \\~\\ \small{Weizhou Xing \\ \small{w.xing@student.tue.nl}}}
 
 \author{Weizhou Xing}
 
 %\version{1.0}
-\orderissuer{P. A. J. Hilbers, B. J. T. Breuer}
+\orderissuer{P.A.J. Hilbers, B.J.T. Breuer}
 \copyholder{}
 \administrativeunit{Department of Biomedical Engineering}
 \department{\textit{Computational Biology Group}}
@@ -76,15 +84,25 @@
 %\listoftables
 
 
-\chapter{Chapter1}
-\subfile{chapters/part1.tex}
+\chapter{Introduction}
+\subfile{chapters/Introduction.tex}
 
-\chapter{Chapter2}
-\subfile{chapters/part2.tex}
+\chapter{Methods}
+\subfile{chapters/Methods.tex}
+
+\chapter{Results}
+\subfile{chapters/Results.tex}
+
+\chapter{Discussion}
+\subfile{chapters/Discussion.tex}
 
 \begin{appendices}
-\chapter{Appendix1}
-\subfile{chapters/appendix.tex}
+\chapter{Bresenham Algorithm for 3D}
+\subfile{chapters/appendix_bresenham.tex}
+\chapter{Geometry}
+\subfile{chapters/appendix_geometry.tex}
+\chapter{Physics}
+\subfile{chapters/appendix_physics.tex}
 \end{appendices}
 
 \printbibliography[
