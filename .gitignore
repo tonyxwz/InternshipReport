@@ -1,6 +1,6 @@
 *.gz
 *.run.xml
-*.pdf
+*-eps-converted-to.pdf
 *.toc
 *.log
 *.fls
@@ -10,3 +10,4 @@
 *.bbl
 *.aux
 *.out
+citation-2611491.bib
