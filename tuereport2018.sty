@@ -341,6 +341,28 @@
              \fi
             \fi
 }
+\newcommand{\drawtuelogoonly}{
+            \ifx\drawtuelogo\undefined\relax
+            \else
+             % TU/e logo and red lines
+             \pgftext[at=\pgfpoint{\the\paperwidth/2-0.85mm}{\the\paperheight-1.8cm},center,center]{\includegraphics[width=7cm]{tuelogonew}}%
+            %  \pgfsetcolor{tuered}
+            %  \pgfpathmoveto{\pgfpoint{0mm}{\the\paperheight-8.5cm}}
+            %  \pgfpathlineto{\pgfpoint{\the\paperwidth}{\the\paperheight-8.5cm}}
+            %  \pgfpathlineto{\pgfpoint{\the\paperwidth}{\the\paperheight-8.52cm}}
+            %  \pgfpathlineto{\pgfpoint{0cm}{\the\paperheight-8.52cm}}
+            %  \pgfusepath{fill}
+            %  \pgfpathmoveto{\pgfpoint{\the\paperwidth/2-1.12cm}{\the\paperheight}}
+            %  \pgfpathlineto{\pgfpoint{\the\paperwidth/2-1.12cm-\the\paperheight/3.487}{0cm}}
+            %  \pgfpathlineto{\pgfpoint{\the\paperwidth/2-1.14cm-\the\paperheight/3.487}{0cm}}
+            %  \pgfpathlineto{\pgfpoint{\the\paperwidth/2-1.14cm}{\the\paperheight}}
+            %  \pgfusepath{fill}
+             \pgfsetcolor{tuedarkblue}
+             \ifx\innovation\undefined
+               \pgftext[at=\pgfpoint{\the\paperwidth/2-0.7cm-\the\paperheight/3.487}{0.8cm},left,bottom]{\bfseries Where innovation starts}%
+             \fi
+            \fi
+}
 
 \newcommand{\drawtuetableofcontents}{
       \drawtuelogoandaxes
