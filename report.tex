@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper]{report}
-\usepackage{csquotes}
-\usepackage{graphicx,color,booktabs,listings,caption,subcaption,tikz,amsmath,amssymb,placeins,subfiles,tabto}
+\usepackage{graphicx,color,booktabs,listings,tikz,amsmath,amssymb,placeins,subfiles,tabto}
+\usepackage[font={small}]{caption}
 \usetikzlibrary{shapes,arrows}
 \usepackage[english]{babel}
 \usepackage[margin=2.54cm]{geometry}
@@ -10,6 +10,7 @@
 \usepackage[noend]{algpseudocode}
 
 \usepackage[utf8]{inputenc}
+\usepackage{csquotes}
 
 \usepackage[colorlinks=true,linkcolor=blue,urlcolor=black,bookmarksopen=true]{hyperref}
 \usepackage{biblatex}
@@ -20,7 +21,7 @@
 
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
-\usepackage{subcaption} 
+\usepackage{subcaption}
 
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \DeclareMathOperator{\di}{d\!}
@@ -32,32 +33,32 @@
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
- 
+
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},   
+    backgroundcolor=\color{backcolour},
     commentstyle=\color{codegreen},
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{codegray},
     stringstyle=\color{codepurple},
     basicstyle=\footnotesize,
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
     showstringspaces=false,
-    showtabs=false,                  
+    showtabs=false,
     tabsize=2
 }
- 
+
 \lstset{style=mystyle}
 
 \graphicspath{{images/}}
 
 
-\title{A New Way to Simulate HIFU System Using Trident Rays}
+\title{Modelling Ultrasound Propagation in HIFU System Using Beam Spreading}
 \subtitle{Internship Report \\~\\ \small{Weizhou Xing \\ \small{w.xing@student.tue.nl}}}
 
 \author{Weizhou Xing}
@@ -111,4 +112,4 @@ title={References}
 ] %Prints the entire bibliography with the titel "Whole bibliography"
 
 \clearpage
-\end{document} 
+\end{document}
