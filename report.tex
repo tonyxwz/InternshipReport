@@ -6,9 +6,10 @@
 \usepackage[margin=2.54cm]{geometry}
 \usepackage[english]{tuereport2018}
 \usepackage[titletoc]{appendix}
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-
+% \usepackage{algorithm}
+\usepackage{algorithm2e}
+% \usepackage{algorithmic}
+% \usepackage[noend]{algpseudocode}
 \usepackage[utf8]{inputenc}
 \usepackage{csquotes}
 
@@ -28,6 +29,9 @@
 \newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
+\usepackage{xcolor}
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -100,7 +104,7 @@
 \begin{appendices}
 \chapter{Bresenham Algorithm for 3D}
 \subfile{chapters/appendix_bresenham.tex}
-\chapter{Geometry}
+\chapter{Geometry} \label{ap:geometry}
 \subfile{chapters/appendix_geometry.tex}
 \chapter{Physics}
 \subfile{chapters/appendix_physics.tex}
