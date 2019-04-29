@@ -12,5 +12,9 @@
         "*.out": true,
         "*.run.xml": true,
         "*.toc": true
-    }
+    },
+    "latex-workshop.bind.altKeymap.enabled": true,
+    "latex-workshop.latex.autoBuild.cleanAndRetry.enabled": false,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120
 }
