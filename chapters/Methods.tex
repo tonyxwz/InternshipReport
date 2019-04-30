@@ -130,60 +130,60 @@ As explained in Section \ref{sec:trident_theory}, the ray in this model consists
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementation of the Model} \label{sec:implement}
-The mathematical model is written in Python programming language, using scipy suite\cite{scipy}. The visualization of the model is made possible with matplotlib \cite{matplotlib}. The model is produced as a python package \texttt{pyHIFU} and is available online. The four components mentioned in section \ref{sec:components} will be introduced in detail. A Python class is implemented for each component. This make the program more intuitive and easy to maintain. Other than these four component, the geometry, acoustics are also implemented in object-oriented manner. Class \texttt{HIFU} encapsulates several methods for manipulating the four components above. As is shown in Figure \ref{fig:uml_overview}, \texttt{transducer} casts \texttt{ray} at \texttt{media} and grouped them into bundle according to their properties and history. Then, the grouped rays are sampled on \texttt{box} to get the resulted pressure. The same routine is run for all the transducers. The final result is the summation of the result from all transducer.
+The mathematical model is written in Python programming language, using scipy suite\cite{scipy}. The visualization of the model is made possible with matplotlib \cite{matplotlib}. The model is produced as a python package \texttt{pyHIFU} and is available online. The four components mentioned in section \ref{sec:components} will be introduced in detail. A Python class is implemented for each component. This make the program more intuitive and easy to maintain. Other than these four component, the geometry, acoustics are also implemented in object-oriented manner. Class \texttt{HIFU} encapsulates several methods for manipulating the four components above. As is shown in Figure \ref{fig:uml_overview}, \texttt{transducer} casts \texttt{ray} at \texttt{media} and grouped them into bundle according to their properties and history. Then, \texttt{box} samples the intensity causes by every group to get the resulted pressure. The same routine is run for all the transducers. The final result is the summation of the result from all transducer.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{uml_overview}
+    \includegraphics[width=0.7\textwidth]{uml_overview}
     \caption{An overview of all the components in the HIFU system.}
     \label{fig:uml_overview}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%
+\subsection{Media} \label{sec:Media}
+A medium is implemented in class \texttt{Medium}. The medium in this study mainly consists of two parts, geometry and material. The geometry of the medium is a instance of the shape in module geometry (Appendix \ref{ap:geometry}) and defines the shape of the medium in 3D space. The material of the medium defines the physical properties of the medium, including all the properties in Table \ref{tb:media_property}. For example, a medium can have the cuboid as its geometry and the bone as its material. Some properties such as the speed of sound and the attenuation in solid media have different values for longitudinal waves and shear waves. These properties would be store as a list with the first element as the property of longitudinal waves and the second element shear waves. A shape contains several faces. For example, the shape of a cylinder is composed of two circles and a barrel shape. These faces are organized as a list and each of them has its own ID. When a instance of a geometry is initialized, a matrix is created as its property to store the topological relationship of the shape. A such typical matrix of a cylinder would be
+
+\[
+\begin{bmatrix}
+    None & 0 & None \\
+    0 & None & 1 \\
+    None & 0 & None
+\end{bmatrix}
+\]
+
+For example, the first element of the second row is $0$ because the barrel shape is adjacent to the upper circle on its first (index 0) edge.
+
+A Model can contain several media. They can be identified with their \texttt{ID} These medium are store as a graph structure named \texttt{MediaComplex}. For example, in the simplest case, the only medium in the system is markoil. If muscle are taken into consideration, \textit{medium 0} would be markoil and \textit{medium 1} muscle.  When a ray travels in a media, it is important to be able to determine the next medium so as to calculate some reflection and refraction parameters. The graph structure in this model is implemented as a list with an adjacency matrix \texttt{adj\_mtx}. The adjacency matrix is a square matrix $M$. $M_{i,j}$ is the index of the face (Appendix \ref{ap:geometry}) of \textit{medium i} that is adjacent to \textit{medium j}.
+
+In this study, the media all have cubiod shape. It can be extended to more complex shapes such as cylinder or sphere with a little effort.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{uml_cls_media}
+    \caption{Relation between class Medium and class Material.}
+    \label{fig:uml_cls_media}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%
 \subsection{Trident}
-As mentioned earlier, the ray that carries power is implemented as class \texttt{PowRay} (power ray) and the ray that only helps to determine the divergence is implemented as class \texttt{AuxRay} (auxiliary ray). They both inherit from a general purpose ray class \texttt{Ray}. Class \texttt{Ray} is a subclass of the geometrical ray class \texttt{GeoRay} (Appendix \ref{ap:geometry}), with some properties and methods for acoustics simulation.
+As mentioned earlier, the ray that carries power is implemented as class \texttt{PowRay} (power ray) and the ray that only helps to determine the divergence is implemented as class \texttt{AuxRay} (auxiliary ray). They both inherit from a general purpose ray class \texttt{Ray}. On mathematical level, acoustic rays in this model is represented as geometrical rays \texttt{pyHIFU.geometry.Ray}. Class \texttt{Ray} is a subclass of the geometrical ray class \texttt{GeoRay} (Appendix \ref{ap:geometry}), with some properties and methods for acoustics simulation.
 
-A trident ray (class \texttt{Trident}) consists of three rays, one \texttt{PowRay} and two \texttt{AuxRay}s. Every trident have an unique id. Interaction with media doesn't change the id. Member property \code{el\_id} store the id of the transducer where it is casted from. It also have the reference to the media that it reside in. The member property \code{history} records all the media that trident ray has passed through. \code{wavetype} is an int variable that indicates whether the ray is longitudinal or shear wave. A ray can encounter several intersection with media interfaces and produce up to four child rays. Each intersection split the parent rays into reflected rays and transmitted rays, so is the power carried. Once the power of the ray is lower than a predefined threshold \code{powerlimit}, the ray is discarded and the propagation stops.
-The trident rays need to be grouped into bundles according to their \code{bundle\_identifier}. \code{bundle\_identifier} is a string that is composed of the id of the transducer the ray originates from, its history and its wavetype. For example, \code{tr\_128\_mh\_0\_1\_1\_1\_LONGIT} can be intepreted as a longitudinal trident casted from transducer element \textit{no.128} propagates from \textit{media 0} into \textit{media 1} then reflects inside  \textit{media 1} twice until its power is lower than \code{powerlimit}.
+A trident ray (class \texttt{Trident}) consists of three rays, one \texttt{PowRay} and two \texttt{AuxRay}s. Every trident have an unique id. Interaction with media doesn't change the id. Member property \texttt{el\_id} store the id of the transducer where it is casted from. It also have the reference to the media that it reside in. The member property \texttt{history} records all the media that trident ray has passed through. \texttt{wavetype} is an int variable that indicates whether the ray is longitudinal or shear wave. A ray can encounter several intersection with media interfaces and produce up to four child rays. Each intersection split the parent rays into reflected rays and transmitted rays, so is the power carried. Once the power of the ray is lower than a predefined threshold \texttt{powerlimit}, the ray is discarded and the propagation stops.
+The trident rays need to be grouped into bundles according to their \texttt{bundle\_identifier}. The \texttt{bundle\_identifier} is a string that is composed of the id of the transducer the ray originates from, its history and its wavetype. For example, \texttt{tr\_128\_mh\_0\_1\_1\_1\_LONGIT} can be intepreted as a longitudinal trident casted from transducer element \textit{no.128} propagates from \textit{media 0} into \textit{media 1} then reflects inside  \textit{media 1} twice until its power is lower than \texttt{powerlimit}.
 
-
-
-\begin{lstlisting}[language=Python]
-import numpy as np
-    
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
-    
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-    
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-    
-                VT = np.zeros((n*m,1), int)
-    
-    return M
-\end{lstlisting}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{uml_cls_trident}
+    \caption{Relation among class \texttt{pyHIFU.geometry.Ray}, \texttt{Ray}, \texttt{PowRay}, \texttt{AuxRay}  and  \texttt{Trident}.}
+    \label{fig:uml_cls_trident}
+\end{figure}
     
     
 How to init power
 
 how to init phase
+
+insert power-line power
 
 how to find next media
 
@@ -191,10 +191,12 @@ how to refract and reflect
 
 how to get intensity, and 3 method to calculate area
 
+Totally internal reflection
+
 how to 
 %%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Transducer}
-A transducer element is a device that can convert other forms of energy into acoustic energy in ultrasound. The transducer in this study consists of 256 transducer elements. In the model, the transducer is implemented as class \texttt{Transducer} and the transducer element is implemented as class \texttt{TElement}.
+A transducer element is a device that can convert other forms of energy into acoustic energy in the form of ultrasound. The transducer in this study consists of 256 transducer elements. In the model, the transducer is implemented as class \texttt{Transducer} and the transducer element is implemented as class \texttt{TElement}.
 The mathematical model is written in Python programming language, using scipy suite\cite{scipy}. The visualization of the model is made possible with matplotlib \cite{matplotlib}. The four components mentioned in section \ref{sec:components} will be introduced in detail. A Python class is implemented for each component. This make the program more intuitive and easy to maintain. Other than these four component, the geometry, acoustics are also implemented in object-oriented manner. Class \texttt{HIFU} encapsulates several methods for manipulating the four components above. As is shown in Figure \ref{fig:uml_overview}, \texttt{transducer} casts \texttt{ray} at \texttt{media} and grouped them into bundle according to their properties and history. Then, the grouped rays are sampled on \texttt{box} to get the resulted pressure. The same routine is run for all the transducers. The final result is the summation of the result from all transducer.
 
 \IncMargin{1em}
