@@ -1,32 +1,32 @@
 % !TeX root = ../report.tex
 
-In this study, there are two test cases. The first and the most simple one is that the media only consists of the markoil (start media in transducer). The second case is that the media consists of markoil and muscle. Solid media are not implement in this study yet. The resulted pressure only covers the area around actual focus of the transducer (Figure \ref{fig:sampling_box}). The initial intensity of every ray is the accurate value from far field approximation \ref{fig:ffa_profile}. However, error factor is introduced in the sampling process. Neither of the two methods to calculate contribution can produce genuine physics result. Hence, a scaling factor is required to scale the result back to the real world physics unit.
+In this study, there are two test cases. The first and the most simple one is that the media only consists of the Castor oil (start media in transducer). The second case is that the media consists of Castor oil and muscle. Solid media are not implement in this study yet. The resulted pressure only covers the area around the actual focus of the transducer (Figure \ref{fig:sampling_box}). The initial intensity of every ray is the accurate value from the far field approximation \ref{fig:ffa_profile}. However, some error factors are introduced in the sampling process. Neither of the two methods to calculate contribution can produce physically realistic results. Hence, a scaling factor is required to scale the result back to the real physical unit.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{ffa_profile}
-    \caption{Far field approximation profile of one transducer element, start of $x$ axis is the minimal distance that far field holds. At the begining of every ray, the pressure is gained from the far field approxmiation.}
+    \caption{Far field approximation profile of one transducer element, start of $x$ axis is the minimal distance at which the far field approximation holds. At the begining of every ray, the pressure is calculated from the far field approxmiation.}
     \label{fig:ffa_profile}
 \end{figure}
 
-In this study, the result from Modena et al \cite{Modena_2018} is assumed as the ground truth. All the result from this study is compared against the ground truth. Despite the requirement of a scaling factor, however, the efforts in this study only try to prove that this method is possible for the first and the second test case. Hence, the comparison is based on similarity of the shape of the resulted pressure.
+In this study, the result from Modena et al \cite{Modena_2018} is assumed as the gold standard. All the results from this study are compared against the gold standard. Despite the requirement of a scaling factor, however, the efforts in this study only try to prove that this method is possible for the first and the second test case. Hence, the comparison is based on similarity of the shape of the resulted pressure.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.55\textwidth]{one_transducer_highres}
-    \caption{Pressure caused by one transducer. Blank point is due to that a small number of rays cannot cover all the area.}
+    \caption{Pressure caused by one transducer. Multiple blank points appear because a small number of rays cannot cover all the area.}
     \label{fig:one_transducer_intensity}
 \end{figure}
 
-The ground truth is a matrix with the dimension of $75$ by $30$ by $30$. The result in this study is cropped to the same dimension to compare against ground truth. The similarity metric employed in the study is P-norm distance, in this case $p=3$.
+The gold standard is a matrix with the dimension of $75$ by $30$ by $30$. The result in this study is cropped to the same dimension to compare against gold standard. The similarity metric employed in the study is the P-norm distance, in this case $p=2$.
 
 \begin{equation} \label{eq:pnorm}
     D=\left(\sum_{i=0}^{n}|a_i - b_i|^p\right)^{1/p}
 \end{equation}
 
-In equation \ref{eq:pnorm}, $a_i$ stands for the result in this study and $b_i$ is the ground truth. An analysis of variance is performed on the three determining parameters of the result, number of rays, trident angle and theta (Section \ref{sec:components}).
+In equation \ref{eq:pnorm}, $a_i$ stands for the result in this study and $b_i$ is the gold standard. An analysis of variance is performed on the three determining parameters of the result, number of rays, trident angle and theta (Section \ref{sec:components}).
 
-The pressure is visualized as a heat map. First, we visualize the process of transmission and reflection of the ray origining from one transducer only (Figure \ref{fig:4reflection}). The color bar shows the pressure at the position. Figure \ref{fig:4reflection-a} show the state when the rays just emitted from the transducer element. It can be observed that the pressure suddenly decreases after passing through the interface. The rays reflected back into the markoils are discarded. Figure \ref{fig:4reflection-b} shows the state when the ray hits the second interface. It produces a nice illustration of reflection and refraction due to the large difference in speed of sound in the muscle and the bone. Figure \ref{fig:4reflection-c} and figure \ref{fig:4reflection-d} display the continued path of the reflected ray and refracted ray and their intersection with interfaces, respectively. When there's only one transducer element sending out rays, the pressure is always higher near the transducer. However, if all the transducer are activated, the superposition of all the transducer near the focus area will produce higher pressure.
+The pressure is visualized as a heat map. First, we visualize the process of transmission and reflection of the ray originating from one transducer only (Figure \ref{fig:4reflection}). The color bar shows the pressure at the position. Figure \ref{fig:4reflection-a} show the state when the rays just emitted from the transducer element. It can be observed that the pressure suddenly decreases after passing through the interface. The rays reflected back into the Castor oils are discarded. Figure \ref{fig:4reflection-b} shows the state when the ray hits the second interface. It produces a nice illustration of reflection and refraction due to the large difference in speed of sound in the muscle and the bone. Figure \ref{fig:4reflection-c} and figure \ref{fig:4reflection-d} display the continued path of the reflected ray and refracted ray and their intersection with interfaces, respectively. When there's only one transducer element sending out rays, the pressure is always higher near the transducer. However, if all the transducer are activated, the superposition of all the transducer near the focus area will produce higher pressure.
 
 \begin{figure}[h]
     \centering
@@ -78,7 +78,7 @@ An advantage feature of ray tracing model is that it takes the interference of t
     \caption{The focus area in case 1 (two media and one interface). The interference patterns can be observed.} \label{fig:interference}
 \end{figure}
 
-An experiment is set up to include three media in the geometry, markoil, muscle and bone. The actual focus area falls in the muscle, close to the muscle-bone interface. As a result, the pressure will include not only the interference between the rays casted from the transducer, but also the interference between incident rays and reflected rays at the focus areas. In Figure \ref{fig:3_med_interfered_focus}, the pressure at the focus area in this situation is displayed, in $-z$ direction in Figure \ref{fig:sampling_box}. Below the sampling window is the muscle-bone interface. Above the sampling window is the transducer. The interference between the incident rays and the reflected rays result in horizontal interference pattern, symmetric against a central plane. This can also prove the correctness of the ray casting model. 
+An experiment is set up to include three media in the geometry, Castor oil, muscle and bone. The actual focus area falls in the muscle, close to the muscle-bone interface. As a result, the pressure will include not only the interference between the rays cast from the transducer, but also the interference between incident rays and reflected rays at the focus areas. In Figure \ref{fig:3_med_interfered_focus}, the pressure at the focus area in this situation is displayed, in $-z$ direction in Figure \ref{fig:sampling_box}. Below the sampling window is the muscle-bone interface. Above the sampling window is the transducer. The interference between the incident rays and the reflected rays result in horizontal interference pattern, symmetric against a central plane. This can also prove the correctness of the ray casting model. 
 
 \begin{figure}[h]
     \centering
@@ -107,7 +107,7 @@ The pressure can also be visualized as surface, which is also the method employe
     \caption{The focus area in case 1 (two media and one interface). The interference patterns can be observed.} \label{fig:surface}
 \end{figure}
 
-To compare the similarity the result in this study with ground truth, three analysis of variance studies are conducted. There are many parameters which can affect the result. The most important three are number of rays $n\_rays$, theta max $\theta_{max}$ and trident angle. From previous study, it seems that more rays can yield better result. However, it also increases the computational time. To find an optimum number of rays which not only produces a result similar to the ground truth but also saves computational time, the number of rays is sampled in the range from 1000 to 20000 at the step of 500.
+To compare the similarity the result in this study with gold standard, three analysis of variance studies are conducted. There are many parameters which can affect the result. The most important three are number of rays $n\_rays$, theta max $\theta_{max}$ and trident angle. From previous study, it seems that more rays can yield better result. However, it also increases the computational time. To find an optimum number of rays which not only produces a result similar to the gold standard but also saves computational time, the number of rays is sampled in the range from 1000 to 20000 at the step of 500.
 
 \begin{figure}[h]
     \centering
@@ -116,9 +116,9 @@ To compare the similarity the result in this study with ground truth, three anal
     \label{fig:anova_nrays}
 \end{figure}
 
-The similarity metric is calculated for each number of rays (Figure \ref{fig:anova_nrays}). The 3-norm distance is minimal at around $n\_rays=4500$. The less the distance is, the more similar the result in this study is to the ground truth. Before $n\_rays=4500$, the distance drastically decreases. After $n\_rays=4500$, the distance increases at a slower pace. This phenomenon can be interpreted as that the trident ray method produces the result most similar to the ground truth at $n\_rays=4500$. When $n\_rays$ is more than $4500$, the trident ray method can producer even smoother result than the ground truth (Figure \ref{fig:surface}). In the following experiments, the number of rays is 4500. 
+The similarity metric is calculated for each number of rays (Figure \ref{fig:anova_nrays}). The 3-norm distance is minimal at around $n\_rays=4500$. The less the distance is, the more similar the result in this study is to the gold standard. Before $n\_rays=4500$, the distance drastically decreases. After $n\_rays=4500$, the distance increases at a slower pace. This phenomenon can be interpreted as that the trident ray method produces the result most similar to the gold standard at $n\_rays=4500$. When $n\_rays$ is more than $4500$, the trident ray method can produce an even smoother result than the gold standard (Figure \ref{fig:surface}). In the following experiments, the number of rays is 4500. 
 
-Theta max $\theta_{max}$ determines the spreading angle of the rays from one transducer element. When the number of rays is determined, smaller spreading angle can cast more rays to the focus area. However, $\theta_{max}$ is also required to be large enough to make sure that every cube in the sampling box is covered. A similar study is conducted for parameter $\theta_{max}$. $\theta_{max}$ is incremented from $0.01$ to $0.1$, $0.01$ at each step (Figure \ref{fig:anova_theta_max}). Similarly, the distance plot is very similar to that of $n\_rays$. The minimal distance is achieve at $\theta_{max}=0.05$. From $\theta_{max}=0.01$ till $\theta_{max}=0.03$, the distance decreases faster. This is due to that the $\theta_{max}$ is too small to cover the entire sampling space. In the next study, $\theta_{max}=0.05$ is used as the optimal value.
+Theta max $\theta_{max}$ determines the spreading angle of the rays from one transducer element. When the number of rays is determined, smaller spreading angle can cast more rays to the focus area. However, $\theta_{max}$ is also required to be large enough to make sure that every cube in the sampling box is covered. A similar study as before is conducted for parameter $\theta_{max}$. $\theta_{max}$ is incremented from $0.01$ to $0.1$, $0.01$ at each step (Figure \ref{fig:anova_theta_max}). Similarly, the distance plot is very similar to that of $n\_rays$. The minimal distance is achieved at $\theta_{max}=0.05$. From $\theta_{max}=0.01$ till $\theta_{max}=0.03$, the distance decreases faster. This is due to that the $\theta_{max}$ is too small to cover the entire sampling space. These experiments only analyze the separate behaviour of different parameters. Although $\theta_{max}=0.05$ might not be the optimal value, it is used in the following experiments.
 
 \begin{figure}[h]
     \centering
@@ -134,6 +134,6 @@ Theta max $\theta_{max}$ determines the spreading angle of the rays from one tra
     \label{fig:anova_trident_angle}
 \end{figure}
 
-Theta max $\theta_{max}$ determines the spreading angle of the rays from one transducer element. When the number of rays is determined, smaller spreading angle can cast more rays to the focus area. However, $\theta_{max}$ is also required to be large enough to make sure that every cube in the sampling box is covered. A similar study is conducted for parameter $\theta_{max}$. $\theta_{max}$ is incremented from $0.01$ to $0.1$, $0.01$ at each step (Figure \ref{fig:anova_theta_max}). Similarly, the distance plot is very similar to that of $n\_rays$. The minimal distance is achieve at $\theta_{max}=0.05$. From $\theta_{max}=0.01$ till $\theta_{max}=0.03$, the distance decreases faster. This is due to that the $\theta_{max}$ is too small to cover the entire sampling space. In the next study, $\theta_{max}=0.05$ is used as the optimal value.
+The third parameter to be analysed is the angle between the power ray and the auxiliary ray within a trident. Figure \ref{fig:anova_trident_angle} shows the result of changing the trident angle on the pnorm distance. However, it doesn't show any evidence of an optimal value. The experiment in this study uses 0.005 as the optimal trident angle.
 
-The third parameter to be analysed is the angle between the power ray and the auxiliary ray within a trident. Figure \ref{fig:anova_trident_angle} shows the result of analysis of trident angle. However, it doesn't show any evidence of an optimal value. The experiment in this study uses 0.005 as the optimal trident angle.
+\textcolor{red}{conclusion of results}

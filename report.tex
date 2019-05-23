@@ -7,7 +7,7 @@
 \usepackage[english]{tuereport2018}
 \usepackage[titletoc]{appendix}
 % \usepackage{algorithm}
-\usepackage{algorithm2e}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 % \usepackage{algorithmic}
 % \usepackage[noend]{algpseudocode}
 \usepackage[utf8]{inputenc}
@@ -23,7 +23,7 @@
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
 \usepackage{subcaption}
-
+\usepackage[scaled=0.9]{inconsolata}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \DeclareMathOperator{\di}{d\!}
 \newcommand*\Eval[3]{\left.#1\right\rvert_{#2}^{#3}}
@@ -95,19 +95,19 @@
 \chapter{Methods}
 \subfile{chapters/Methods.tex}
 
-\chapter{Results}
+\chapter{Results} \label{sec:results}
 \subfile{chapters/Results.tex}
 
 \chapter{Discussion}
 \subfile{chapters/Discussion.tex}
 
 \begin{appendices}
-\chapter{Bresenham Algorithm for 3D}
-\subfile{chapters/appendix_bresenham.tex}
+\chapter{Float Number Precision} \label{ap:floatnumber}
+\subfile{chapters/appendix_float.tex}
+\chapter{Ray Box Intersection} \label{ap:rayboxintersection}
+\subfile{chapters/appendix_intersection.tex}
 \chapter{Geometry} \label{ap:geometry}
 \subfile{chapters/appendix_geometry.tex}
-\chapter{Physics}
-\subfile{chapters/appendix_physics.tex}
 \end{appendices}
 
 \printbibliography[
