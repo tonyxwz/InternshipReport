@@ -7,10 +7,8 @@ When running in serial, the model is about 2.5 times faster than the old method 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{same_smooth}
-    \caption{Result from this study that is closest to gold standard (4500 rays, simulation time 2hrs)}
+    \caption{Result from this study that is closest to gold standard (4500 rays  per transducer element, simulation time 2hrs)}
     \label{fig:same_smooth}
 \end{figure}
 
 This study introduces a new way to simulate the propagation of ultrasound ways in HIFU system using beam spreading. The goal of this study was to prove the feasibility of this new method. The model is based on acoustics laws and is capable of handling the interference. The model is tested on a simple geometry. It could be extended to support more complicated geometries. In application, the geometry model usually consists of triangular mesh with plane boundaries, which are compatible with the plane implemented in this study. However, the porous structure of the bone might be a challenge to the model \cite{vanwijk2013} because the reflection and refraction could be more complicated than that in this study. Further research is needed to determine the scaling factor to scale the result in this study to physical value. The pressure can then be converted to temperature in the geometry.
-
-\textcolor{red}{conclusion}
